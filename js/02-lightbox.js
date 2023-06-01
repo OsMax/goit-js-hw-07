@@ -2,20 +2,14 @@ import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
 const place = document.querySelector(".gallery");
-console.log(galleryItems);
-for (let item of galleryItems) {
-  const newLi = document.createElement("li");
-  newLi.classList.add("gallery__item");
-  let str = `<a class="gallery__link" href="${item.original}" onclick="return false">
-    <img
-      class="gallery__image"
-      src="${item.preview}"
-      alt="${item.description}"
-    />
-  </a>`;
-  newLi.insertAdjacentHTML("beforeend", str);
-  place.appendChild(newLi);
-}
+
+const newItems = galleryItems.map((e) => {
+  return `<li class="gallery__item">
+  <a class="gallery__link" href="${e.original}" onclick="return false">
+    <img class="gallery__image" src="${e.preview}" alt="${e.description}"/>
+  </a></li>`;
+});
+place.insertAdjacentHTML("beforeend", newItems.join(""));
 
 let gallery = new SimpleLightbox(".gallery a", {
   caption: true,
