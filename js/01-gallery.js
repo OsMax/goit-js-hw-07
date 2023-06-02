@@ -33,7 +33,7 @@ place.addEventListener("click", (e) => {
   instance.show();
 
   function closeModal(e) {
-    if (e.code !== "Space") {
+    if (e.code !== "Escape") {
       return;
     }
     // console.log("!!!");
