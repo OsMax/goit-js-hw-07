@@ -20,17 +20,33 @@ place.addEventListener("click", (e) => {
     return;
   }
   const instance = basicLightbox.create(
-    `<img src="${e.target.dataset.source}">`
+    `<img src="${e.target.dataset.source}">`,
+    {
+      onShow: () => {
+        document.addEventListener("keydown", closeModal);
+      },
+      onClose: () => {
+        document.removeEventListener("keydown", closeModal);
+      },
+    }
   );
   instance.show();
 
-  const closeModal = (e) => {
+  function closeModal(e) {
     if (e.code !== "Space") {
       return;
     }
-    instance.close(() => {
-      document.removeEventListener("keydown", closeModal);
-    });
-  };
-  document.addEventListener("keydown", closeModal);
+    // console.log("!!!");
+    instance.close();
+  }
+
+  // const closeModal = (e) => {
+  //   if (e.code !== "Space") {
+  //     return;
+  //   }
+  //   instance.close(() => {
+  //     document.removeEventListener("keydown", closeModal);
+  //   });
+  // };
+  // document.addEventListener("keydown", closeModal);
 });
